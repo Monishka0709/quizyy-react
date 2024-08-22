@@ -1,178 +1,108 @@
-import React from 'react'
+import React, {useRef, useState} from 'react'
 import '../Quiz.css'
+import Modal from './Modal'
+import { data } from '../assets/data'
+// import {  toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 
 const Quiz = () => {
 
-
-  const questions = [
-    {
-        question: "________ language does not follow OOPS concept.",
-        answers:[
-            {text: "C++", correct: false},
-            {text: "C", correct: true},
-            {text: "Java", correct: false},
-            {text: "Python", correct: false}
-        ]
-    },
-    {
-        question: "________ is called instance of a class.",
-        answers:[
-            {text: "Object", correct: true},
-            {text: "Constructor", correct: false},
-            {text: "Destructor", correct: false},
-            {text: "Method", correct: false}
-        ]
-    },
-    {
-        question: "Which keyword is used to inherit a class in java?",
-        answers:[
-            {text: "inherits", correct: false},
-            {text: "new", correct: false},
-            {text: "extends", correct: true},
-            {text: "interface", correct: false}
-        ]
-    },
-    {
-        question: "Which of the following is not an OOP concept?",
-        answers:[
-            {text: "Encapsulation", correct: false},
-            {text: "Exception", correct: true},
-            {text: "Polymorphism", correct: false},
-            {text: "Abstraction", correct: false}
-        ]
-    },
-    {
-        question: "Which feature of OOP describes the reusability of code?",
-        answers:[
-            {text: "Abstraction", correct: false},
-            {text: "Encapsulation", correct: false},
-            {text: "Polymorphism", correct: false},
-            {text: "Inheritance", correct: true}
-        ]
-    },
     
-];
+    let [index, setIndex] = useState(0)
+    let [question, setQuestion] = useState(data[index])
+    let [lock, setLock] = useState(false)
+    let [score, setScore] = useState(0)
+    let [result, setResult] = useState(false)
+    let [showModal, setShowModal] = useState(true)
+    let [isButtonDisabled, setButtonDisabled] = useState(false)
 
-const questionElement = document.getElementById("question");
-const answerButtons = document.getElementById("answer-buttons");
-const nextButton = document.getElementById("next-btn");
+    
 
-let currentQuestionIndex = 0;
-let score = 0;
+    let Option1 = useRef(null)
+    let Option2 = useRef(null)
+    let Option3 = useRef(null)
+    let Option4 = useRef(null)
 
-function startQuiz()
-{
-    currentQuestionIndex = 0;
-    score = 0;
-    nextButton.innerHTML = "Next";
-    showQuestion();
+    let option_array = [Option1,Option2,Option3,Option4]
 
-}
+    // toast('Instructions:'+<br/>+'You will be rewarded +4 marks for every correct answer'+'You will be getting -1 marks for every incorrect answer')
+    
 
-function showQuestion()
-{
-    resetState();
-    let currentQuestion = questions[currentQuestionIndex];
-    let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + "." + currentQuestion.question;
-
-
-    currentQuestion.answers.forEach(answer => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.text;
-        button.classList.add("btn");
-        answerButtons.appendChild(button);
-        if(answer.correct)
-        {
-            button.dataset.correct = answer.correct;
-        }
-        button.addEventListener("click", selectAnswer);
-    })
-}
-
-function resetState()
-{
-    nextButton.style.display = "none";
-    while(answerButtons.firstChild)
-    {
-        answerButtons.removeChild(answerButtons.firstChild);
-    }
-}
-
-function selectAnswer(e)
-{
-    const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct === "true";
-    if(isCorrect)
-    {
+    const checkAns = (e,ans) => {
         
-        selectedBtn.classList.add("correct");
-        score++;
-    }
-    else{
-        selectedBtn.classList.add("incorrect");
-    }
-    Array.from(answerButtons.children).forEach(button =>{
-        if(button.dataset.correct === "true"){
-            button.classList.add("correct");
-
+        if(lock === false){
+            if(question.ans===ans) {
+                e.target.classList.add("correct");
+                setLock(true)
+                setScore(prev => prev+4)
+                setButtonDisabled(true)
+                
+            }
+            else {
+                e.target.classList.add("incorrect");
+                setButtonDisabled(true)
+                setLock(true)
+                setScore(prev => prev-1)
+                option_array[question.ans-1].current.classList.add("correct")
+            }    
         }
-        button.disabled = true;
+
         
-    });
-    nextButton.style.display = "block";
-}
-
-function showScore()
-{
-    resetState();
-    questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
-    nextButton.innerHTML = "Play Again";
-    nextButton.style.display = "block";
-}
-function handleNextButton()
-{
-    currentQuestionIndex++;
-    if(currentQuestionIndex< questions.length)
-    {
-        showQuestion();
     }
-    else{
-        showScore();
+
+    
+
+    const next = () => {
+        setButtonDisabled(false)
+        if(lock === true) {
+            if (index == data.length-1) {
+                setResult(true)
+                return 0
+                
+            }
+            setIndex(++index)
+            setQuestion(data[index])
+            setLock(false)
+            option_array.map((option)=> {
+                option.current.classList.remove("correct")
+                option.current.classList.remove("incorrect")
+                return null
+            })
+        }
     }
-}
- 
 
-nextButton.addEventListener("click", ()=> {
-    if(currentQuestionIndex < questions.length)
-    {
-        handleNextButton();
+    const reset = () => {
+        setIndex(0)
+        setQuestion(data[0])
+        setLock(false)
+        setScore(0)
+        setResult(false)
     }
-    else
-    {
-        startQuiz();
-    }
-});
-startQuiz();
-
-
-
 
   return (
-    <div>
-      <div className="app">
-        <h1>Simple Quiz</h1>
-        <div className="quiz">
-            <h2 id="question">Question goes here</h2>
-            <div id="answer-buttons">
-                <button className="btn">Answer1</button>
-                <button className="btn">Answer2</button>
-                <button className="btn">Answer3</button>
-                <button className="btn">Answer4</button> 
-            </div>
-            <button id="next-btn">Next</button>
+    
+    <div className='quiz--container'>
+        {showModal && <Modal onClose={() => setShowModal(false)}/> }
+        <h1>Quiz App</h1>
+        <hr/>
+        {result?<></>:<>
+            <h2>{index + 1}. {question.question}</h2>
+        <div className='btn--container'>
+            <button ref={Option1} className='btn' onClick={(e) => {checkAns(e,1)}} disabled={isButtonDisabled}>{question.option1}</button>
+            <button ref={Option2} className='btn' onClick={(e) => {checkAns(e,2)}} disabled={isButtonDisabled}>{question.option2}</button>
+            <button ref={Option3} className='btn' onClick={(e) => {checkAns(e,3)}} disabled={isButtonDisabled}>{question.option3}</button>
+            <button ref={Option4} className='btn' onClick={(e) => {checkAns(e,4)}} disabled={isButtonDisabled}>{question.option4}</button>
         </div>
-    </div>
+        <button onClick={next} className='nextbtn'>Next</button>
+        <div className='indexing'>{index + 1} of {data.length} questions</div>
+      </>}
+
+        {result?<>
+        <h2>You scored {score} out of {data.length*4}</h2>
+        <button className='nextbtn' onClick={reset}>Reset</button>
+        </>:<></>}
+        
     </div>
   )
 }

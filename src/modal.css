@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;    
+}
+/* body {
+    border-color: #550790c8;
+} */
+
+.bg{
+    position: fixed;
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    /* Fallback color */
+    display: flex;
+    justify-content: center;
+    
+    inset: 0;
+    background: rgb(152,74,211);
+background: radial-gradient(circle, rgba(152,74,211,1) 26%, rgba(85,7,144,1) 80%);
+    /* background-color: #550790c8; */
+    
+  }
+  .boxbg{
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    width: 50vw;
+    min-width: 20rem;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(228, 228, 228); 
+  }
+  .okbtn
+  {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+ 

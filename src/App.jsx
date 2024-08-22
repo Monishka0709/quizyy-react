@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Home from './components/Home';
 import Login from './components/Login'
+import Modal from './components/Modal'
 import './App.css'
 // import { Route } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ function App() {
   
 
   return (
-    <>
+    <div className='app--container'>
     <Router>
       <Routes>
       <Route path='/' element={<Home/>}/>
@@ -26,7 +27,8 @@ function App() {
     </Router>
 
     {/* <Home/> */}
-    </>
+    {/* <Quiz/> */}
+    </div>
   )
 }
 

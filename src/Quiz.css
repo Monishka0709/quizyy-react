@@ -14,36 +14,51 @@ body
     background: rgb(152,74,211);
 background: radial-gradient(circle, rgba(152,74,211,1) 26%, rgba(85,7,144,1) 80%);
 }
-.app
+.quiz--container
 {
     background: #fff;
-    width: 90%;
-    max-width: 600px;
-    margin: 100px auto 0;
+    max-width: 80rem;
+    width: 40rem;
+    /* width: 50vw; */
+    margin: 100px auto;
+    color: rgb(152,74,211);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
     border-radius: 10px;
-    padding: 30px;
+    padding: 40px 50px;
 } 
 
-.app h1{
+.quiz--container h1{
     
     color: #35035b;
     font-weight: 600;
-    border-bottom: 1px solid #333;
-    padding-bottom: 30px;
+    /* border-bottom: 1px solid #333; */
+    
 }
 
-.quiz
-{
-    padding: 20px 0;
+.quiz--container hr {
+    border: none;
+    height: 2px;
+    margin-bottom: 0.5rem;
+    background: #707070;
 }
 
-.quiz h2{
-    font-size: 18px ;
+
+.quiz--container h2{
+    font-size: 1.13rem ;
     color: #35035b;
     font-weight: 600;
+} 
+.btn--container {
+    display: flex;
+    flex-direction: column;
 }
-.btn
-{
+
+.btn {
+    list-style: none;
+    display: flex;
+    align-items: center;
     background-color: #fff;
     color: #222;
     font-weight: 500;
@@ -55,20 +70,11 @@ background: radial-gradient(circle, rgba(152,74,211,1) 26%, rgba(85,7,144,1) 80%
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.3s;
-}
-
-.btn:hover:not([disabled])
-{
-    background: #222;
-    color: #fff;
 
 }
-.btn:disabled{
-    cursor: no-drop;
-}
 
-#next-btn
-{
+.nextbtn {
+    margin: auto;
     background-color: #49057d ;
     color: #fff;
     font-weight: 500;
@@ -76,11 +82,19 @@ background: radial-gradient(circle, rgba(152,74,211,1) 26%, rgba(85,7,144,1) 80%
     width: 150px;
     border:0;
     padding: 10px;
-    margin: 20px auto 0;
     border-radius: 4px;
     cursor: pointer;
-    display: none;
+    
+    
 }
+
+.indexing {
+    margin: 0 auto ;
+    font-size: 0.8rem;
+    color: #707070;
+}
+
+
 .correct
 {
     background-color: #9aeabc;
@@ -89,4 +103,108 @@ background: radial-gradient(circle, rgba(152,74,211,1) 26%, rgba(85,7,144,1) 80%
 .incorrect
 {
     background-color: #ff9393;
+} 
+
+.btn:hover:not([disabled])
+{
+    background: #222;
+    color: #fff;
+
 }
+.btn:disabled{
+    cursor: not-allowed;
+}
+
+
+.bg{
+    position: fixed;
+    z-index: 2; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100vw; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    /* Fallback color */
+    display: flex;
+    justify-content: center;
+    
+    
+    inset: 0;
+    /* background: rgb(152,74,211);
+background: radial-gradient(circle, rgba(152,74,211,1) 26%, rgba(85,7,144,1) 80%); */
+background-color: rgb(0 0 0 / .6);    
+/* background-color: #550790c8; */
+    
+  }
+  .instructions--logo--container img{
+    height: 5rem;
+    width: 5rem;
+  }
+  .box-bg{
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+    width: 50vw;
+    min-width: 20rem;
+    align-items: center;
+    justify-content: center;
+    height: 75vh;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: rgb(228, 228, 228); 
+  }
+  .okbtn
+  {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .modal-box {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    h1{
+      padding-bottom: 1rem;
+    }
+  }
+
+  .instructions
+  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .instructions ul li {
+    /* display: flex; */
+    flex: content;
+    align-items: center;
+    list-style: circle;
+    margin: 1.2rem 0rem;
+    height: 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    text-wrap: balance;
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+  #okbtn {
+    flex: 1;
+    background-color: #49057d ;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.3rem;
+    width: 150px;
+    border:0;
+    padding: 0.5rem 1rem;
+    margin: 1.2rem 0;
+    border-radius: 0.8rem;
+    cursor: pointer;
+  }
