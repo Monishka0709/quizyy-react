@@ -3,6 +3,8 @@ import Logo from '../assets/minilogo.png'
 import { useState } from 'react'
 import {Navigate} from 'react-router-dom'
 
+
+
 const Navbar = () => {
 
   const [showLogin,setShowLogin] = useState(false);
@@ -11,6 +13,7 @@ const Navbar = () => {
         return <Navigate to='/Login' target='_blank' />;
     }
 
+  
   return (
     
       <div id="nav">
@@ -27,7 +30,8 @@ const Navbar = () => {
         
     </div>
 </div>
-    </div>
+
+          </div>
 
     
   )

@@ -124,7 +124,7 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   }
   .bar-container {
     
-    display: inline-block;
+    display: flex;
     cursor: pointer;
     background-color: #550790;
     width: 100vw;
@@ -132,24 +132,45 @@ background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
     padding: 10px ;
   }
   
-  .bar1, .bar2, .bar3 {
-    width: 35px;
-    height: 5px;
-    background-color: white;
-    margin: 6px 0;
-    /* z-index: ; */
+  .bar-container svg {
+    
+    color: white;
+    font-weight: 700;
+    font-size: 2rem;
     transition: 0.4s;
   }
-  
-  .change .bar1 {
-    transform: translate(0, 11px) rotate(-45deg);
+
+  .profile-pic-container {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 50%;
+    height: 10.5rem;
+    width: 10.5rem;
+    margin: 2vh auto;
+  }
+  .profile-pic-container  img{
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+  }
+  .profile-name-container {
+    text-align: center;
+    margin: 2vh;
+  }
+  .css-10hburv-MuiTypography-root {
+    font-family: 'Poppins' !important;
+    font-weight: 500 !important;
+    color: #2d044f;
+  }
+
+  .css-4t3x6l-MuiPaper-root-MuiDrawer-paper {
+    background-color: #ebf4fb !important;
+    border-radius: 0 10px 10px 0;
   }
   
-  .change .bar2 {opacity: 0;}
-  
-  .change .bar3 {
-    transform: translate(0, -11px) rotate(45deg);
-  }
 
   #login
   {

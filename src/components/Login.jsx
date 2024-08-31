@@ -10,7 +10,7 @@ const Login = () => {
                 <h1>Login</h1>
                 <button className="closeBtn" ><i className="fa-solid fa-x"></i></button>
             </div>
-            <div class="login">
+            <div className="login">
                 <input type="email" placeholder="Enter your email" className="input--field" />
 
                 <input type="password"  placeholder="Enter your password" className="input--field" />
